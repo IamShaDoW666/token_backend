@@ -36,7 +36,6 @@ class CallController extends Controller
     public function getAllServicesAndCounters()
     {
         $counters = $this->counterRepository->getAllActiveCounters();
-        dd($counters);
         $services = $this->serviceRepository->getAllActiveServices();
         return response()->json(['services' => $services, 'counters' => $counters]);
     }
@@ -185,6 +184,8 @@ class CallController extends Controller
 
     public function noShowToken(Request $request)
     {
+
+ 
         $request->validate([
             'call_id' => 'required|exists:calls,id',
         ]);

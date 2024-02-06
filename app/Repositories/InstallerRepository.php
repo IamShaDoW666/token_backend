@@ -342,7 +342,7 @@ class InstallerRepository
 
     public function SetCustomerDetails($data){
         try{
-            dd('ok');
+           
             $response = Http::post(config('services.key_verification.set_customer_details'), $data);
             if($response->successful() &&  $response = $response->collect()['status_code'] && $response->collect()['status_code'] == 200){
                 return 'Success';

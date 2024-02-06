@@ -20,6 +20,7 @@ class DashboardController extends Controller
     }
     public function dashboard()
     {
+
         $today_queue = Queue::where('created_at', '>=', Carbon::now()->startOfDay())->where('created_at', '<=', Carbon::now())
             ->where('called', false)->count();
         $today_served = Call::where('created_at', '>=', Carbon::now()->startOfDay())->where('created_at', '<=', Carbon::now())

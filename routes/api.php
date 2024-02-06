@@ -11,9 +11,11 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 
 Route::group(['middleware' => ['auth:sanctum']], function () {
-    Route::post('call-next', [API\CallController::class, 'callNext'])->name('call_next_mobile');
+    Route::post('callnext', [API\CallController::class, 'callNext'])->name('call_next_mobile');
     Route::post('logout', [API\UserController::class, 'logout']);
-    Route::get('dashboard', [API\DashboardController::class, 'dashboard'])->name('dashboard')->middleware('permission:view dashboard');
+    Route::get('dashboard', [API\DashboardController::class, 'dashboard'])->name('dashboard');
     Route::post('set-service-and-counter', [API\CallController::class, 'setServiceApiCounter']);
     Route::post('get-tokens', [API\CallController::class, 'getTokensForCall']);
+    Route::post('call/no-show', [API\CallController::class, 'noShowApiToken'])->name('noshow-token');
+    Route::post('serve-token', [API\CallController::class, 'serveApiToken'])->name('serve_token');
 });

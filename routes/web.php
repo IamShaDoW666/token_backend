@@ -66,7 +66,7 @@ Route::middleware(['setLocale'])->group(function () {
 
         Route::group(['middleware' => ['permission:call token']], function () {
             Route::get('call', [CallController::class, 'showCallPage'])->name('show_call_page');
-            Route::post('call-next', [CallController::class, 'callNext'])->name('call_next');
+            Route::post('call-next', [CallController::class, 'callnext'])->name('call_next');
             // Route::post('call-next-by-id', [CallController::class, 'callNextById'])->name('call_next_by_id');
             Route::post('serve-token', [CallController::class, 'serveToken'])->name('serve_token');
             Route::post('call/no-show', [CallController::class, 'noShowToken'])->name('noshow-token');

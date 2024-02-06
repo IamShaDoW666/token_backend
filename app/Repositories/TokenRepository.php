@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Repositories;
-
 use App\Models\Call;
 use App\Models\Queue;
 use App\Models\Service;

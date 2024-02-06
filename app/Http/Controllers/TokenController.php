@@ -69,7 +69,7 @@ class TokenController extends Controller
             $queue = $this->tokenRepository->createToken($service, $request->all(), $request->with_details ? true : false);
             $customer_waiting = $this->tokenRepository->customerWaiting($service);
             $customer_waiting = $customer_waiting > 0 ?  $customer_waiting - 1 : $customer_waiting;
-            
+        
             $settings = Setting::first();
            
     //    dd($queue->number);

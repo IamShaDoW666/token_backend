@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use App\Models\Counter;
 use App\Models\Service;
+use App\Models\Call;
 use App\Models\Session as ModelsSession;
 use App\Models\Setting;
 use Illuminate\Http\Request;
@@ -43,12 +44,6 @@ class CallController extends Controller
 
             if (!$called) return response()->json(['no_token_found' => true]);
             $settings = Setting::first();
-
-            // if ($called->queue->service->sms_enabled && $called->queue->service->status_message_enabled && $called->queue->phone && $settings->sms_url) {
-            //     foreach ($called->queue->service->status_message_positions as $position) {
-            //         $this->callRepository->sendStatusMessage($called->queue, $position, $settings);
-            //     }
-            // }
 
             $this->callRepository->setCallsForDisplay($called->service);
             $this->tokenRepository->setTokensOnFile();
@@ -91,4 +86,61 @@ class CallController extends Controller
         }
         return  response()->json(['service' => $service, 'counter' => $counter, 'tokens_for_call' => $tokens_for_call, 'called_tokens' => $called_tokens]);
     }
+
+    public function noShowApiToken(Request $request)
+    {
+
+    
+        $request->validate([
+            'call_id' => 'required|exists:calls,id',
+        ]);
+        DB::beginTransaction();
+        try {
+            $call = Call::where('id', $request->call_id)->whereNull('call_status_id')->first();
+            if ($call) {
+                $call = $this->callRepository->noShowToken($call);
+                $settings = Setting::first();
+                if ($call->queue->service->sms_enabled && $call->queue->service->noshow_message_enabled && $call->queue->phone && $settings->sms_url) {
+                    SendSmsJob::dispatch($call->queue, $call->queue->service->call_message_format, $settings, 'noshow');
+                }
+                $this->callRepository->setCallsForDisplay($call->service);
+                $this->tokenRepository->setTokensOnFile();
+            } else {
+                return response()->json(['already_executed' => true]);
+            }
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return response()->json(['status_code' => 500]);
+        }
+        db::commit();
+        return response()->json($call);
+    }
+
+    public function serveApiToken(Request $request)
+    {
+        $request->validate([
+            'call_id' => 'required|exists:calls,id',
+        ]);
+        DB::beginTransaction();
+        try {
+            $call = Call::where('id', $request->call_id)->whereNull('call_status_id')->first();
+            if ($call) {
+                $call = $this->callRepository->serveToken($call);
+                $settings = Setting::first();
+                if ($call->queue->service->sms_enabled && $call->queue->service->completed_message_enabled && $call->queue->phone && $settings->sms_url) {
+                    SendSmsJob::dispatch($call->queue, $call->queue->service->call_message_format, $settings, 'served');
+                }
+                $this->callRepository->setCallsForDisplay($call->service);
+                $this->tokenRepository->setTokensOnFile();
+            } else {
+                return response()->json(['already_executed' => true]);
+            }
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return response()->json(['status_code' => 500]);
+        }
+        DB::commit();
+        return response()->json($call);
+    }
+
 }

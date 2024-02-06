@@ -23,7 +23,7 @@ class InstallerController extends Controller
     public function index(Request $request)
     {
        
-        dd("hello");
+        
         if ($request->getSchemeAndHttpHost() . '/' . $request->route()->uri == $request->url()) $sub_directory = 'false';
         else $sub_directory = 'true';
         
@@ -69,15 +69,15 @@ class InstallerController extends Controller
     public function saveWizard(Request $request)
     {
         $data = $request->all();
-        dd($data);
+        
         $rules = config('installer.environment.form.rules');
-        dd($rules);
+       
         try {
             $request->validate($rules);
             
           
             $this->validateCustomerData($data['customer_details']);
-            dd($this->validateCustomerData);
+     
             $app_url = str_replace("environment/save", "", $request->url());
             $res = $this->installer->saveFileWizard($request->all(), $app_url);
             $data['customer_details']['host'] = $app_url;
