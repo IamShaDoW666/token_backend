@@ -213,6 +213,8 @@ class CallController extends Controller
 
     public function recallToken(Request $request)
     {
+
+         
         $request->validate([
             'call_id' => 'required|exists:calls,id',
         ]);
@@ -229,7 +231,7 @@ class CallController extends Controller
 
         DB::commit();
 
-        session()->push('called', $call);
+        // session()->push('called', $call);
         return response()->json($call);
     }
 

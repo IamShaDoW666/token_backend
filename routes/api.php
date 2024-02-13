@@ -16,6 +16,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('dashboard', [API\DashboardController::class, 'dashboard'])->name('dashboard');
     Route::post('set-service-and-counter', [API\CallController::class, 'setServiceApiCounter']);
     Route::post('get-tokens', [API\CallController::class, 'getTokensForCall']);
-    Route::post('call/no-show', [API\CallController::class, 'noShowApiToken'])->name('noshow-token');
-    Route::post('serve-token', [API\CallController::class, 'serveApiToken'])->name('serve_token');
+    Route::post('call/no-show', [API\CallController::class, 'noShowApiToken']);
+    Route::post('call/recall-token', [API\CallController::class, 'recallApiToken']);
+    Route::post('serve-token', [API\CallController::class, 'serveApiToken']);
 });

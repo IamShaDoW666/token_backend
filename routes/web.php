@@ -64,7 +64,7 @@ Route::middleware(['setLocale'])->group(function () {
             Route::resource('services', ServiceController::class)->names('services');
         });
 
-        Route::group(['middleware' => ['permission:call token']], function () {
+        // Route::group(['middleware' => []], function () {
             Route::get('call', [CallController::class, 'showCallPage'])->name('show_call_page');
             Route::post('call-next', [CallController::class, 'callnext'])->name('call_next');
             // Route::post('call-next-by-id', [CallController::class, 'callNextById'])->name('call_next_by_id');
@@ -75,7 +75,7 @@ Route::middleware(['setLocale'])->group(function () {
             Route::get('get-token-for-call', [CallController::class, 'getTokensForCall'])->name('get-token-for-call');
             Route::get('get-services-counters', [CallController::class, 'getAllServicesAndCounters'])->name('get-services-counters');
             Route::get('get-called-tokens', [CallController::class, 'getCalledTokens'])->name('get-called-tokens');
-        });
+        // });
         //dashboard
 
         Route::get('dashboard', [DashboardController::class, 'dashboard'])->name('dashboard')->middleware('permission:view dashboard');

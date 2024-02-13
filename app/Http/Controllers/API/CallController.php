@@ -1,7 +1,5 @@
 <?php
-
 namespace App\Http\Controllers\API;
-
 use App\Http\Controllers\Controller;
 use App\Models\Counter;
 use App\Models\Service;
@@ -12,7 +10,6 @@ use Illuminate\Http\Request;
 use App\Repositories\API\CallRepository;
 use App\Repositories\TokenRepository;
 use Illuminate\Support\Facades\DB;
-
 
 class CallController extends Controller
 {
@@ -41,10 +38,8 @@ class CallController extends Controller
         try {
             if ($request->by_id) $called = $this->callRepository->callnextTokenById($request->queue_id, $request->service_id);
             else $called = $this->callRepository->callNext($request->service_id, $request->counter_id);
-
             if (!$called) return response()->json(['no_token_found' => true]);
             $settings = Setting::first();
-
             $this->callRepository->setCallsForDisplay($called->service);
             $this->tokenRepository->setTokensOnFile();
         } catch (\Exception $e) {
@@ -121,6 +116,8 @@ class CallController extends Controller
         $request->validate([
             'call_id' => 'required|exists:calls,id',
         ]);
+
+  
         DB::beginTransaction();
         try {
             $call = Call::where('id', $request->call_id)->whereNull('call_status_id')->first();
@@ -140,6 +137,30 @@ class CallController extends Controller
             return response()->json(['status_code' => 500]);
         }
         DB::commit();
+        return response()->json($call);
+    }
+
+    public function recallApiToken(Request $request)
+    {
+
+         
+        $request->validate([
+            'call_id' => 'required|exists:calls,id',
+        ]);
+        DB::beginTransaction();
+        try {
+            $call = Call::find($request->call_id);
+            $call = $this->callRepository->recallToken($call);
+            $this->callRepository->setCallsForDisplay($call->service);
+            $this->tokenRepository->setTokensOnFile();
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return response()->json(['status_code' => 500]);
+        }
+
+        DB::commit();
+
+        // session()->push('called', $call);
         return response()->json($call);
     }
 

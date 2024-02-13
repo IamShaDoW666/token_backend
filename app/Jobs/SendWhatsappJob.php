@@ -33,11 +33,12 @@ class SendWhatsappJob  implements ShouldQueue
 
     public function __construct($token,$pdf, $text, $settings, $from_call)
    {
-        $this->token = $token;
+       $this->token = $token;
        $this->pdf = $pdf;
-         $this->text = $text;
-        $this->from_call = $from_call;
-         $this->settings = $settings;
+       $this->text = $text;
+       $this->from_call = $from_call;
+       $this->settings = $settings;
+       
      }
 
     /**
