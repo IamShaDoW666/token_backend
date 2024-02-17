@@ -112,6 +112,7 @@ Route::middleware(['setLocale'])->group(function () {
     });
     // Route::group(['middleware' => ['permission:issue token']], function () {
     Route::get('kiosk', [TokenController::class, 'issueToken'])->name('issue_token');
+    Route::get('live/{queue:reference_no}', [TokenController::class, 'liveToken'])->name('live_token');
     Route::post('queue', [TokenController::class, 'createToken'])->name('create-token');
     // });
     // Route::group(['middleware' => ['permission:view display']], function () {

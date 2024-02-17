@@ -2,7 +2,7 @@
 @section('content')
 <!-- BEGIN: Page Main-->
 <div id="loader-wrapper">
-    <div id="loader"></div>
+<div id="loader"></div>
 
     <div class="loader-section section-left"></div>
     <div class="loader-section section-right"></div>
@@ -65,7 +65,7 @@
                         </div>
                     </div>
                 </div> 
-                <div class="col m12">
+                <!-- <div class="col m12">
                     <div class="card-panel left-align" style="margin-bottom:0;height:74vh;display:flex;flex-direction:row;justify-content:center;align-items:center">
                         <div>
                             <div class="bolder-color" style="font-size:50px; margin:0px">{{__('messages.display.token number')}}</div>
@@ -80,10 +80,10 @@
                             <div v-if="!tokens[0]" style="font-size:70px; color:red;line-height:1.5">{{__('messages.display.nil')}}</div>
                         </div>
                     </div>
-                </div>
+                </div> -->
             </div>
-            <p>@{{ tokens }}</p>
-            <p>@{{ queue }}</p>
+            <!-- <p>@{{ tokens }}</p>
+            <p>@{{ queue }}</p> -->
             <div class="row" style="margin-bottom:0; margin-top: 15px;">
                 <marquee><span style="font-size:{{$settings->display_font_size}}px;color:{{$settings->display_font_color}}">{{$settings->display_notification ? $settings->display_notification : 'Hello' }}<span></span></span></marquee>
             </div>

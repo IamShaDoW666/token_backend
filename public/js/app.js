@@ -19275,6 +19275,8 @@ __webpack_require__(/*! ./call-page-layout/call_page_layout */ "./resources/js/c
 
 __webpack_require__(/*! ./display-page/display-page */ "./resources/js/display-page/display-page.js");
 
+__webpack_require__(/*! ./live-page/livepage */ "./resources/js/live-page/livepage.js");
+
 __webpack_require__(/*! ./installer/installer.js */ "./resources/js/installer/installer.js"); // $(document).ready(function() {
 // 	setTimeout(function(){
 // 		// $('h1').css('color','#222222');
@@ -20549,6 +20551,201 @@ if (document.getElementById("installer")) {
     }
   };
   Vue.createApp(app).mount('#installer');
+}
+
+/***/ }),
+
+/***/ "./resources/js/live-page/livepage.js":
+/*!********************************************!*\
+  !*** ./resources/js/live-page/livepage.js ***!
+  \********************************************/
+/***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
+
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+var _require = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js"),
+    forEach = _require.forEach,
+    times = _require.times;
+
+if (document.getElementById("live-page")) {
+  var app = {
+    data: function data() {
+      return {
+        token: null,
+        lastToken: null,
+        dataLoaded: false,
+        isCalled: false,
+        called_tokens: [],
+        tokens_for_next_to_call: [],
+        count: "0",
+        time_after_called: null,
+        timer_interval: null,
+        time_out: null,
+        averageTime: null
+      };
+    },
+    methods: {
+      getTokenForCall: function getTokenForCall() {
+        var _this = this;
+
+        axios.get(window.JLToken.get_token_for_call_url).then(function (res) {
+          _this.tokens_for_next_to_call = res.data.tokens_for_call;
+          _this.called_tokens = res.data.called_tokens;
+          _this.token = _this.called_tokens.find(function (e) {
+            var _window;
+
+            return e.queue_id == ((_window = window) === null || _window === void 0 ? void 0 : _window.JLToken.token_reference);
+          });
+
+          if (_this.token == null) {
+            _this.token = _this.tokens_for_next_to_call.find(function (e) {
+              var _window2;
+
+              return e.id == ((_window2 = window) === null || _window2 === void 0 ? void 0 : _window2.JLToken.token_reference);
+            });
+          }
+
+          if (_this.called_tokens.length && _this.called_tokens[0] && _this.called_tokens[0].ended_at == null) {
+            _this.lastToken = _this.called_tokens[0];
+
+            _this.setDataForTimer(_this.lastToken);
+
+            _this.isCalled = true;
+
+            var timeArr = _this.called_tokens.map(function (obj) {
+              return obj.served_time;
+            }).filter(function (e) {
+              return e != null;
+            });
+
+            _this.averageTime = _this.getAverageTime(timeArr);
+            console.log(timeArr, _this.averageTime);
+          } else if (_this.called_tokens && _this.called_tokens.length && _this.called_tokens[0]) {
+            var _timeArr = _this.called_tokens.map(function (obj) {
+              return obj.served_time;
+            }).filter(function (e) {
+              return e != null;
+            });
+
+            _this.averageTime = _this.getAverageTime(_timeArr);
+            console.log(_timeArr, _this.averageTime);
+            _this.lastToken = _this.called_tokens[0];
+            _this.isCalled = false;
+          } else {
+            _this.isCalled = false;
+          }
+
+          _this.time_out = setTimeout(function () {
+            _this.getTokenForCall();
+          }, 1000);
+
+          _this.disableLoader();
+        })["catch"](function (err) {
+          var _window3, _window3$JLToken;
+
+          _this.disableLoader();
+
+          M.toast({
+            html: (_window3 = window) === null || _window3 === void 0 ? void 0 : (_window3$JLToken = _window3.JLToken) === null || _window3$JLToken === void 0 ? void 0 : _window3$JLToken.error_lang,
+            classes: "toast-error"
+          });
+        });
+      },
+      getAverageTime: function getAverageTime(timeList) {
+        var _this2 = this;
+
+        var totalSeconds = timeList.reduce(function (acc, timeStr) {
+          return acc + _this2.timeToSeconds(timeStr);
+        }, 0);
+        var averageSeconds = Math.round(totalSeconds / timeList.length);
+        return this.secondsToTime(averageSeconds);
+      },
+      secondsToTime: function secondsToTime(seconds) {
+        var hours = Math.floor(seconds / 3600);
+        var minutes = Math.floor(seconds % 3600 / 60);
+        var remainingSeconds = seconds % 60;
+
+        if (hours == 0) {
+          return "".concat(String(minutes).padStart(2, "0"), " Minutes ").concat(String(remainingSeconds).padStart(2, "0"), " Seconds");
+        }
+
+        return "".concat(String(hours).padStart(2, "0"), " Hours ").concat(String(minutes).padStart(2, "0"), " Minutes ").concat(String(remainingSeconds).padStart(2, "0"), " Seconds");
+      },
+      timeToSeconds: function timeToSeconds(timeStr) {
+        var _timeStr$split$map = timeStr.split(":").map(Number),
+            _timeStr$split$map2 = _slicedToArray(_timeStr$split$map, 3),
+            hours = _timeStr$split$map2[0],
+            minutes = _timeStr$split$map2[1],
+            seconds = _timeStr$split$map2[2];
+
+        return hours * 3600 + minutes * 60 + seconds;
+      },
+      enableLoader: function enableLoader() {
+        $("body").removeClass("loaded");
+      },
+      disableLoader: function disableLoader() {
+        $("body").addClass("loaded");
+      },
+      timer: function timer() {
+        var _this3 = this;
+
+        this.timer_interval = setInterval(function () {
+          if (parseInt(_this3.count) <= 0) {
+            clearInterval();
+            return;
+          }
+
+          _this3.time_after_called = _this3.toHHMMSS(_this3.count);
+          _this3.count = (parseInt(_this3.count) + 1).toString();
+        }, 1000);
+      },
+      toHHMMSS: function toHHMMSS(count) {
+        var sec_num = parseInt(count, 10);
+        var hours = Math.floor(sec_num / 3600);
+        var minutes = Math.floor((sec_num - hours * 3600) / 60);
+        var seconds = sec_num - hours * 3600 - minutes * 60;
+
+        if (hours < 10) {
+          hours = "0" + hours;
+        }
+
+        if (minutes < 10) {
+          minutes = "0" + minutes;
+        }
+
+        if (seconds < 10) {
+          seconds = "0" + seconds;
+        }
+
+        var time = hours + ":" + minutes + ":" + seconds;
+        return time;
+      },
+      setDataForTimer: function setDataForTimer(token) {
+        if (this.timer_interval) clearInterval(this.timer_interval);
+        this.time_after_called = null;
+        this.count = token.counter_time;
+        if (token.counter_time == 0 && token.started_at && token.ended_at == null) this.count = "1";
+        this.timer();
+      }
+    },
+    mounted: function mounted() {
+      this.getTokenForCall();
+    },
+    unmounted: function unmounted() {
+      clearInterval(this.time_out);
+    }
+  };
+  window.jlTokenCallPageApp = Vue.createApp(app).mount("#live-page");
 }
 
 /***/ }),

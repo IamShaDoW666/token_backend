@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Jobs\SendSmsJob;
 use App\Jobs\SendWhatsappJob;
 use App\Models\Call;
@@ -33,14 +34,14 @@ class TokenController extends Controller
     public function issueToken()
 
     {
-       
+
         return view(
             'issue_token.index',
             ['services' => $this->services->getAllActiveServices(), 'settings' => Setting::first()]
         );
     }
 
-    
+
 
     public function createToken(Request $request, Service $service)
     {
@@ -64,20 +65,20 @@ class TokenController extends Controller
 
             ]);
             // $data = ['name' => 'John Doe'];
-        //    dd($this->services->getAllActiveServices());
+            //    dd($this->services->getAllActiveServices());
             // $pdf = Pdf::loadView('pdf.template',['service' => $service, 'settings' => Setting::first()] );
             $queue = $this->tokenRepository->createToken($service, $request->all(), $request->with_details ? true : false);
             $customer_waiting = $this->tokenRepository->customerWaiting($service);
             $customer_waiting = $customer_waiting > 0 ?  $customer_waiting - 1 : $customer_waiting;
-        
+
             $settings = Setting::first();
-           
-    //    dd($queue->number);
+
+            //    dd($queue->number);
             if ($service->sms_enabled && $service->optin_message_enabled && $queue->phone && $settings->sms_url) {
                 SendSmsJob::dispatch($queue, $service->optin_message_format, $settings, 'issue_token');
             }
-              
-           
+
+
 
             $this->tokenRepository->setTokensOnFile();
         } catch (\Exception $e) {
@@ -90,18 +91,25 @@ class TokenController extends Controller
             return response()->json(['status_code' => 500]);
         }
         DB::commit();
-      
+
         $queue = $queue->load('service');
         $options = new Options();
         $options->set('isHtml5ParserEnabled', true);
         $options->set('isPhpEnabled', true);
         $pdf = new Dompdf($options);
-        $pdf = Pdf::loadView('pdf.template',['queue' => $queue, 'customer_waiting' => $customer_waiting, 'settings' => $settings] ); 
+        $pdf = Pdf::loadView('pdf.template', ['queue' => $queue, 'customer_waiting' => $customer_waiting, 'settings' => $settings]);
         // dd($queue->service->name);
         $tempPdfPath = public_path('temp-pdfs/' . $queue->number . '.pdf');
-        $pdf->save($tempPdfPath); 
-        
-        SendWhatsappJob::dispatchAfterResponse($queue,$customer_waiting, asset('temp-pdfs/' . $queue->number . '.pdf'), $service->optin_message_format, $settings, 'issue_token');
+        $pdf->save($tempPdfPath);
+
+        SendWhatsappJob::dispatchAfterResponse($queue, $customer_waiting, asset('temp-pdfs/' . $queue->number . '.pdf'), $service->optin_message_format, $settings, 'issue_token');
         return response()->json(['status_code' => 200, 'queue' => $queue, 'customer_waiting' => $customer_waiting, 'settings' => $settings]);
+    }
+    public function liveToken(Queue $queue)
+    {        
+        $settings = Setting::first();
+        $file = 'storage/tokens_for_callpage.json';
+        $date = Carbon::now()->toDateString();
+        return view('live.index', compact('queue', 'settings', 'file', 'date'));
     }
 }

@@ -154,5 +154,4 @@ if (document.getElementById("display-page")) {
         }
     };
     Vue.createApp(app).mount('#display-page')
-
 }

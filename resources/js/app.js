@@ -9,6 +9,7 @@ window.moment = require('moment');
 require('./callpage/callpage');
 require('./call-page-layout/call_page_layout');
 require('./display-page/display-page');
+require('./live-page/livepage');
 require('./installer/installer.js');
 
 // $(document).ready(function() {
