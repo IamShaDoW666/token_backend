@@ -48,16 +48,16 @@ class CallController extends Controller
         ]);
         DB::beginTransaction();
         try {
-            if (!(ModelsSession::active()->where('id', '!=', session()->getId())->where('service_id', $request->service_id)->where('counter_id', $request->counter_id)->get()->isEmpty())) {
-                return response()->json(['already_exists' => true]);
-            }
+            // if (!(ModelsSession::active()->where('id', '!=', session()->getId())->where('service_id', $request->service_id)->where('counter_id', $request->counter_id)->get()->isEmpty())) {
+            //     return response()->json(['already_exists' => true]);
+            // }
             $service = Service::find($request->service_id);
             
             $counter = Counter::find($request->counter_id);
-            $session = ModelsSession::find(session()->getId());
-            $session->service_id = $service->id;
-            $session->counter_id = $counter->id;
-            $session->save();
+            // $session = ModelsSession::find(session()->getId());
+            // $session->service_id = $service->id;
+            // $session->counter_id = $counter->id;
+            // $session->save();
         } catch (\Exception $e) {
             DB::rollback();
             return response()->json($e);
