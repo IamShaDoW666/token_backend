@@ -64,9 +64,6 @@ class TokenController extends Controller
                 })],
 
             ]);
-            // $data = ['name' => 'John Doe'];
-            //    dd($this->services->getAllActiveServices());
-             $pdf = Pdf::loadView('pdf.template',['service' => $service, 'settings' => Setting::first()] );
             $queue = $this->tokenRepository->createToken($service, $request->all(), $request->with_details ? true : false);
             $customer_waiting = $this->tokenRepository->customerWaiting($service);
             $customer_waiting = $customer_waiting > 0 ?  $customer_waiting - 1 : $customer_waiting;
@@ -77,7 +74,7 @@ class TokenController extends Controller
             if ($service->sms_enabled && $service->optin_message_enabled && $queue->phone && $settings->sms_url) {
                 SendSmsJob::dispatch($queue, $service->optin_message_format, $settings, 'issue_token');
             }
-           
+
 
 
             $this->tokenRepository->setTokensOnFile();
@@ -106,7 +103,7 @@ class TokenController extends Controller
         return response()->json(['status_code' => 200, 'queue' => $queue, 'customer_waiting' => $customer_waiting, 'settings' => $settings]);
     }
     public function liveToken(Queue $queue)
-    {        
+    {
         $settings = Setting::first();
         $file = 'storage/tokens_for_callpage.json';
         $date = Carbon::now()->toDateString();
