@@ -12,8 +12,7 @@
         <p>{{$queue->formated_date}}</p>
         <h5> Token Number:{{$queue->token_number}}</h5>
         <p class="instructions">Please wait for your trun</p>
-        <h6 style = "color:red;">Customer waiting : {{$customer_waiting}}</h6>
-    
+        <h6 style = "color:red;">Customer waiting : {{$customer_waiting}}</h6>    
 </body>
 </html>
 

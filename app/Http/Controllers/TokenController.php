@@ -95,12 +95,11 @@ class TokenController extends Controller
         $options->set('isPhpEnabled', true);
         $pdf = new Dompdf($options);
         $pdf = Pdf::loadView('pdf.template', ['queue' => $queue, 'customer_waiting' => $customer_waiting, 'settings' => $settings]);
-        // dd($queue->service->name);
         $tempPdfPath = public_path('temp-pdfs/' . $queue->number . '.pdf');
         $pdf->save($tempPdfPath);
 
         SendWhatsappJob::dispatchAfterResponse($queue, $customer_waiting, asset('temp-pdfs/' . $queue->number . '.pdf'), $service->optin_message_format, $settings, 'issue_token');
-        return response()->json(['status_code' => 200, 'queue' => $queue, 'customer_waiting' => $customer_waiting, 'settings' => $settings]);
+        return response()->json(['status_code' => 200, 'queue' => $queue, 'customer_waiting' => $customer_waiting, 'settings' => $settings, 'asset' => asset('temp-pdfs/' . $queue->number . '.pdf')]);
     }
     public function liveToken(Queue $queue)
     {
