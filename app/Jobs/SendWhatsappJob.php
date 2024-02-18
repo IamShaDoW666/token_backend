@@ -54,7 +54,7 @@ class SendWhatsappJob  implements ShouldQueue
                     'sender' => '917012749946',
                     'number' => $this->token->phone,
                     'message' => "Hello",
-                    'url'  => $this->pdf,
+                    'url'  => 'https://token.saakshi.cloud/temp-pdfs/29.pdf',
                     'type' => 'pdf',
                     
                     ];
