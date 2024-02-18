@@ -55,7 +55,7 @@ class SendWhatsappJob  implements ShouldQueue
                     'number' => $this->token->phone,
                     'message' => "Hello",
                     'type' => 'pdf',
-                    'url'  => 'https://token.saakshi.cloud/temp-pdfs/11.pdf',
+                    'url'  => $this->pdf,
                     ];
                     $response = Http::post('https://saakshi.cloud/send-media', $data);
                     
