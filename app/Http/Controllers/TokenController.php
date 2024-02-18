@@ -97,8 +97,8 @@ class TokenController extends Controller
         $pdf = Pdf::loadView('pdf.template', ['queue' => $queue, 'customer_waiting' => $customer_waiting, 'settings' => $settings]);
         $tempPdfPath = public_path('temp-pdfs/' . $queue->id . '.pdf');
         $pdf->save($tempPdfPath);
-
-        SendWhatsappJob::dispatch($queue, $customer_waiting, asset('temp-pdfs/' . $queue->id . '.pdf'), $service->optin_message_format, $settings, 'issue_token');
+        $pdfPath = asset('temp-pdfs/' . $queue->id . '.pdf');
+        SendWhatsappJob::dispatchAfterResponse($queue, $customer_waiting, $pdfPath , $service->optin_message_format, $settings, 'issue_token');
         return response()->json(['status_code' => 200, 'queue' => $queue, 'customer_waiting' => $customer_waiting, 'settings' => $settings, 'asset' => asset('temp-pdfs/' . $queue->id . '.pdf')]);
     }
     public function liveToken(Queue $queue)
