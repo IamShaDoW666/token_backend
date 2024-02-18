@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Jobs;
-
 use Carbon\Carbon;
 use Faker\Provider\bg_BG\PhoneNumber;
 use Illuminate\Bus\Queueable;
@@ -48,18 +47,17 @@ class SendWhatsappJob  implements ShouldQueue
      */
     public function handle()
     {
+        $url = config('app.url') . '/live/' .  $this->token->reference_no;
         try {
-        
              $data = [
                     'api_key' => 'VzkZWxvGBEQ0AKvkDsvjG5q7kxfk8a',
                     'sender' => '917012749946',
                     'number' => $this->token->phone,
-                    'message' => 'Token No'. $this->token->number . 'generated',
-                    // 'message' => $this->pdf,
-                    // 'type' => 'pdf',
-                    // 'url'  => $this->pdf,
+                    'message' => $url,
+                    'type' => 'pdf',
+                    'url'  => $this->pdf,
                     ];
-                    $response = Http::post('https://saakshi.cloud/send-message', $data);
+                    $response = Http::post('https://saakshi.cloud/send-media', $data);
                     
                     if ($response->failed()) {
                         session()->flash('status', 'Task was successful!');

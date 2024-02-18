@@ -149,19 +149,17 @@ class ServiceController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Service $service)
-    {
-
-       
+    {   
         $request->validate([
             'name' => 'required|unique:services,name,' . $service->id,
             'letter' => 'required|unique:services,letter,' . $service->id,
             'start_number' => 'required',
             'sms' => 'nullable',
-            'optin_message' => 'required',
-            'call_message' => 'required',
-            'noshow_message' => 'required',
-            'completed_message' => 'required',
-            'status_message' => 'required',
+            'optin_message' => 'required_if:sms,==,1',
+            'call_message' => 'required_if:sms,==,1',
+            'noshow_message' => 'required_if:sms,==,1',
+            'completed_message' => 'required_if:sms,==,1',
+            'status_message' => 'required_if:sms,==,1',
             'optin_message_format' => 'required_if:optin_message,==,1',
             'call_message_format' => 'required_if:call_message,==,1',
             'noshow_message_format' => 'required_if:noshow_message,==,1',
@@ -174,7 +172,7 @@ class ServiceController extends Controller
             'email_required' => 'nullable',
             'ask_phone' => 'required',
             'phone_required' => 'nullable',
-        ]);
+        ]);        
         DB::beginTransaction();
         try {
             $service = $this->services->update($request->all(), $service);

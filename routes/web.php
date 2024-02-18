@@ -16,6 +16,7 @@ use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\TokenController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PdfController;
+use App\Models\Queue;
 use Barryvdh\DomPDF\Facade\Pdf;
 use App\Repositories\ServiceRepository;
 use Telegram\Bot\Api;
@@ -34,15 +35,9 @@ use Telegram\Bot\Laravel\Facades\Telegram;
 
 
 Route::get('/test', function() {
-    // $tele = new Api('6782465165:AAEqP05ti_saURgNwqe8_XE2_C9FKn0Hqi4');
-    return Telegram::sendMessage([
-        'chat_id' => '1539305312',
-        'text' => 'Hello World'
-    ]);
-    // $response = $tele->sendMessage([
-    //     'chat_id' => '7012749946',
-    //     'text' => 'Hello World'
-    // ]);
+    $token = Queue::find(1);
+    $url = config('app.url') . '/live/' .  $token->reference_no;
+    return $url;
 });
 
 //login
