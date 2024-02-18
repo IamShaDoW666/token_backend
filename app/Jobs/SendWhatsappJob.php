@@ -54,10 +54,10 @@ class SendWhatsappJob  implements ShouldQueue
                     'sender' => '917012749946',
                     'number' => $this->token->phone,
                     'message' => "Hello",
-                    // 'type' => 'pdf',
-                    // 'url'  => $this->pdf,
+                    'type' => 'pdf',
+                    'url'  => $this->pdf,
                     ];
-                    $response = Http::post('https://saakshi.cloud/send-message', $data);
+                    $response = Http::post('https://saakshi.cloud/send-media', $data);
                     
                     if ($response->failed()) {
                         session()->flash('status', 'Task was successful!');
