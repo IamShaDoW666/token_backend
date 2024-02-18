@@ -47,14 +47,14 @@ class SendWhatsappJob  implements ShouldQueue
      */
     public function handle()
     {
-       
+       $url = config('app.url') . '/live/' . $this->token->reference_no;
         try {
              $data = [
                     'api_key' => 'VzkZWxvGBEQ0AKvkDsvjG5q7kxfk8a',
                     'sender' => '917012749946',
                     'number' => $this->token->phone,
-                    'message' => "Hello",
-                    'url'  => 'https://token.saakshi.cloud/temp-pdfs/29.pdf',
+                    'message' => $url,
+                    'url'  => $this->pdf,
                     'type' => 'pdf',
                     
                     ];
