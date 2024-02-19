@@ -3,7 +3,9 @@ namespace App\Http\Controllers\API;
 use App\Consts\CallStatuses;
 use App\Http\Controllers\Controller;
 use App\Models\Call;
+use App\Models\Counter;
 use App\Models\Queue;
+use App\Models\Service;
 use App\Repositories\ReportRepository;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -30,5 +32,12 @@ class DashboardController extends Controller
         $chart_data = $this->reportRepository->getTodayYesterdayData();
         return response()->json($chart_data);
         
+    }
+
+    public function servicesAndCounters() 
+    {
+        $services = Service::where('status', 1)->get();
+        $counters = Counter::where('status', 1)->get();
+        return response()->json(['services' => $services, 'counters' => $counters]);
     }
 }

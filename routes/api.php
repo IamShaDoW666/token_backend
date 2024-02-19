@@ -20,3 +20,4 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('call/recall-token', [API\CallController::class, 'recallApiToken']);
     Route::post('serve-token', [API\CallController::class, 'serveApiToken']);
 });
+Route::get('services-counters', [API\DashboardController::class, 'servicesAndCounters']);
