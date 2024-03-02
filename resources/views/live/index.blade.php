@@ -1,25 +1,28 @@
+  
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Digiimpact</title>
+</head>
+<body>
 @extends('layout.live_page')
-@section('content')
-
-<div class="center2" id="live-page">
-    <h5>Department:{{$queue->service->name}}</h5>    
-    <div v-if="token?.id">
-        <h1 style="color: #000">Your Token: {{$queue->letter}} {{$queue->number}}</h1>
-        <!-- <p>Please proceed to counter: @{{token.counter?.name}}</p> -->
-        <!-- <h3>@{{getStatus()}}</h3> -->
-        <h2>Current Token: @{{lastToken.token_letter}} @{{lastToken.token_number}}</h2>
-        <h2>Average Time: @{{averageTime}}</h2>
-        <!-- <div v-for="t in called_tokens">
-            <div class="flex">
-                <h3>@{{t.token_letter}} @{{t.token_number}}</h3>
-                <h4>@{{t.served_time}}</h4>
-            </div>
-        </div> -->
-    </div>
-    <div v-else>
-        <h3>ERROR</h3>
-    </div>
-</div>
+@section('content')    
+  <div class="center2" id="live-page">
+  <div v-if="token?.id" class="token-slip">
+  <div class="title">Your Token: {{$queue->letter}} {{$queue->number}}</div>
+  <div class="token-details">
+  <div>Current Token:<strong> @{{lastToken.token_letter}} @{{lastToken.token_number}}</strong> </div>
+  <div><strong>Average Time: @{{averageTime}}</strong></div>
+  </div>
+  </div>
+  <div v-else>
+  <h3>ERROR</h3>
+  </div>
+ </div>
+</body>
+</html>
 @endsection
 @section('b-js')
 <script>
@@ -37,16 +40,36 @@
 </script>
 
 <style>
+ .token-slip {
+    border-style: dashed;
+    width: 200px; /* Adjust width as needed */
+    padding: 10px;
+    margin: 20px auto;
+    font-family: Arial, sans-serif;
+  }
 
+  .title {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  .token-details {
+    font-size: 14px;
+    margin-bottom: 10px;
+  }
 
-    /* Center the content */
-    .center2 {
+  .barcode {
+    border-top: 1px solid #000;
+    margin-top: 10px;
+    text-align: center;
+    padding-top: 5px;
+  }
+  
+   .center2 {
         text-align: center;
-        border: 2px solid #000; /* Add border to the entire div */
         padding: 10px; /* Add padding for better spacing */
     }
-
-    /* Adjust font sizes */
+   
     h5 {
         font-size: 18px;
     }
