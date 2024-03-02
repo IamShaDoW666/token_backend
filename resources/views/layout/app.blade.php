@@ -5,7 +5,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>JL Token | @yield('title')</title>
+    <title>Digiimpact @yield('title')</title>
     <link rel="apple-touch-icon" href="{{asset('app-assets/images/icon/favicon.ico')}}">
     <link rel="shortcut icon" type="image/x-icon" href="{{asset('app-assets/images/icon/favicon.ico')}}">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -42,7 +42,7 @@
             <nav class="navbar-main navbar-color nav-collapsible sideNav-lock">
                 <div class="nav-wrapper">
                     <ul class="navbar-list left" style="padding-left: 60px;">
-                        <li><span style="font-weight: bold; font-size: x-large; ">JL Token</span></li>
+                        <li><span style="font-weight: bold; font-size: x-large; ">Digiimpact</span></li>
                     </ul>
                     <ul class="navbar-list right">
                         @if(isset(session()->get("settings")->logo) && Storage::disk('public')->exists(session()->get("settings")->logo))
@@ -125,9 +125,9 @@
     <!-- END: Page Main-->
 
     <!-- BEGIN: Footer-->
-    <footer class="page-footer footer footer-static navbar-border navbar-shadow">
-        <div class="footer-copyright">
-            <div class="container" style="display: flex; justify-content: end;">Powered by&nbsp;<a href="https://www.justlabtech.com" target="_blank" style="color:#ffffff;font-weight: bolder;">Justlab Technologies</a>&nbsp;All rights reserved.</div>
+    <footer class="page-footer1" style="z-index: 200; background-color:#f9f9f9">
+        <div class="footer-copyright" >
+            <div class="container" style="display: flex; justify-content: end;">Powered by&nbsp;<a href="https://www.digiimpact.ae" target="_blank" style="color:#000000;font-weight: bolder;">Digiimpact</a>&nbsp;All rights reserved.</div>
         </div>
     </footer>
     @yield('c-js')

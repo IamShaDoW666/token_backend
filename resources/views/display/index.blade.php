@@ -95,7 +95,9 @@
 </div>
 @endsection
 @section('b-js')
+
 <script>
+
     window.JLToken = {
         get_tokens_for_display_url: "{{ asset($file) }}",
         get_initial_tokens: "{{ route('get-tokens-for-display') }}",

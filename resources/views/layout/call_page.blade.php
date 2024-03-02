@@ -25,14 +25,15 @@
   <link rel="stylesheet" type="text/css" href="{{asset('app-assets/css-rtl/themes/vertical-dark-menu-template/style.css')}}">
   <link rel="stylesheet" type="text/css" href="{{asset('app-assets/css-rtl/loader/main.css')}}">
   @else
-  <link rel="stylesheet" type="text/css" href="{{asset('app-assets/css/themes/vertical-dark-menu-template/materialize.css')}}">
+  <link rel="stylesheet" type="text/css" href="{{asset('app-assets/css/themes/vertical-dark-menu-template/materialize.css')}}"> 
   <link rel="stylesheet" type="text/css" href="{{asset('app-assets/css/themes/vertical-dark-menu-template/style.css')}}">
   <link rel="stylesheet" type="text/css" href="{{asset('app-assets/css/loader/main.css')}}">
   @endif
   <link rel="stylesheet" type="text/css" href="{{asset('app-assets/css/loader/normalize.css')}}">
+  <!-- <script src="https://code.responsivevoice.org/responsivevoice.js?key=r9xj0FyQ"></script> -->
 <!--<script src="https://code.responsivevoice.org/responsivevoice.js?key=9bM5BpJH"></script>-->
   <link rel="stylesheet" type="text/css" href="{{ asset('/css/app.css') }}">
-<script src="{{asset('app-assets/js/voice.js')}}"></script>
+<!-- <script src="{{asset('app-assets/js/voice.js')}}"></script> -->
 
   <!-- vue js -->
   @yield('css')
@@ -45,7 +46,7 @@
 
   <!-- BEGIN: Header-->
 
-  <header class="page-topbar noprint" id="header">
+  <!-- <header class="page-topbar noprint" id="header">
     <div class="navbar navbar-fixed">
       <nav class="navbar-main navbar-color nav-collapsible sideNav-lock">
         <div class="nav-wrapper">
@@ -64,7 +65,7 @@
               <img style="max-height:50px" src="{{$settings->logo_url}}" alt="avatar">
             </li>
             @endif
-            <!-- <li class="navbar-list left"><a class="waves-effect waves-block waves-light profile-button" href="javascript:void(0);" data-target="extra-dropdown"><i class="material-icons">attachment</i></a></li> -->
+             <li class="navbar-list left"><a class="waves-effect waves-block waves-light profile-button" href="javascript:void(0);" data-target="extra-dropdown"><i class="material-icons">attachment</i></a></li> 
             <li class="navbar-list left"><a><b>{{$settings->name}},{{$settings->location}}</b></a></li>
             @if(\Request::route()->getName() == 'show_call_page')<li class="dropdown-language"><a class="waves-effect waves-block waves-light translation-button" href="#" data-target="translation-dropdown"><span class="flag-icon flag-icon-{{\App::currentLocale()}}"></span></a></li>@endif
             <li id="side-menu-icon-attachment" class="navbar-list left"><a class="waves-effect waves-block waves-light profile-button" href="javascript:void(0);" data-target="extra-dropdown"><i class="material-icons">attachment</i></a></li>
@@ -96,7 +97,7 @@
 
       </nav>
     </div>
-  </header>
+  </header> -->
   @if(isset($show_menu) && $show_menu)
   @include('layout.menu')
   @endif
@@ -177,11 +178,11 @@
 
   <!-- </div> -->
   <!-- BEGIN: Footer-->
-  <footer class="page-footer footer footer-static navbar-border navbar-shadow noprint">
+  <!-- <footer class="page-footer footer footer-static navbar-border navbar-shadow noprint">
     <div class="footer-copyright">
       <div class="container" style="display: flex; justify-content: end;">Powered by&nbsp;<a href="https://www.justlabtech.com" target="_blank" style="color:#ffffff;font-weight: bolder;">Justlab Technologies</a>&nbsp;All rights reserved.</div>
     </div>
-  </footer>
+  </footer> -->
 
   @yield('b-js')
   <!-- BEGIN VENDOR JS-->

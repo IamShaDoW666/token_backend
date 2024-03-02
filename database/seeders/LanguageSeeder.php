@@ -82,6 +82,34 @@ class LanguageSeeder extends Seeder
                 'token_translation' =>  " token",
                 'please_proceed_to_translation' =>  "silakan lanjutkan ke",
             ],
+            [
+               'id' =>9,
+               'code'=>'ru',
+               'name' => 'Russian',
+               'display'=>'Russian Female',
+               'token_translation' => "жетон",
+               'please_proceed_to_translation' => "пожалуйста, перейдите к",
+
+            ],
+
+            [
+             'id' => 10,
+             'code' => 'uk',
+             'name' => 'Ukrainian',
+             'display' => 'Ukrainian Female',
+             'token_translation' => "жетон",
+             'please_proceed_to_translation' => "будь ласка, перейдіть до",
+          
+            ],
+            [
+                'id' => 11,
+                'code' => 'tr',
+                'name' => 'Turkish',
+                'display' => 'Turkish Female',
+                'token_translation' => "jeton",
+                'please_proceed_to_translation' => "lütfen devam edin",
+             
+               ],
         ];
         foreach ($languages as $language) {
             $data =  Language::find($language['id']);

@@ -11,27 +11,27 @@
         <section class="content-wrapper no-print">
             <div id="callarea">
                 <div>
-                    <table class="table table-dark" style="justify-content:center;margin-bottom:0;height:74vh;">
-                        <thead class="text-center" style="background-color:black">
+                    <table class="table table-dark" style="justify-content:center;margin-bottom:0;">
+                        <thead class="text-center" style="background-color:#00BFFF; justify-content: space-between;align-items: center;margin-left:20px">
                             <tr>
 
-                                <th scope="col" style="font-size:45px;font-weight:bold;line-height:1.2">Token No</th>
-                                <th scope="col" style="font-size:45px;font-weight:bold;line-height:1.2">Counter No</th>
-                                <th scope="col" style="font-size:45px;font-weight:bold;line-height:1.2">Token Status</th>
-                                <th scope="col" style="font-size:45px;font-weight:bold;line-height:1.2">Service Name</th>
+                                <th scope="col" style="font-size:45px;padding-left:130px; font-weight:bold;color:white;line-height:1.2">Token No</th>
+                                <th scope="col" style="font-size:45px;font-weight:bold;color:white;line-height:1.2">Counter No</th>
+                                <th scope="col" style="font-size:45px;font-weight:bold;color:white;line-height:1.2">Token Status</th>
+                                <th scope="col" style="font-size:45px;font-weight:bold;color:white;line-height:1.2">Doctor Name</th>
                             </tr>
 
                         </thead>
                         <tbody>
                             <tr v-for="token in tokens">
-                                <td v-if="token" style="font-size:45px;font-weight:bold;line-height:1.2">@{{token?.token_letter}}-@{{token?.token_number}}</td>
-                                <td v-if="!token" style="font-size:45px;font-weight:bold;line-height:1.2">{{__('messages.display.nil')}}</td>
-                                <td v-if="token" style="font-size:45px;font-weight:bold;line-height:1.2">@{{token?.counter.name}}</td>
-                                <td v-if="!token" style="font-size:45px;font-weight:bold;line-height:1.2">{{__('messages.display.nil')}}</td>
-                                <td v-if="token?.call_status_id == {{CallStatuses::SERVED}}" style="font-size:45px;font-weight:bold;line-height:1.2;color:#00DB3A">{{__('messages.display.served')}}</td>
-                                <td v-if="token?.call_status_id == {{CallStatuses::NOSHOW}}" style="font-size:45px;font-weight:bold;line-height:1.2;color:red">{{__('messages.display.noshow')}}</td>
-                                <td v-if="token?.call_status_id != {{CallStatuses::SERVED}} &&  token?.call_status_id != {{CallStatuses::NOSHOW}}" style="font-size:45px;font-weight:bold;line-height:1.2;color:#D9AD09">Serving</td>
-                                <td>Dr.Sanjay</td>
+                                <td v-if="token" style="font-size:45px;padding-left:160px; font-weight:bold;line-height:1.2">@{{token?.token_letter}}-@{{token?.token_number}}</td>
+                                <td v-if="!token" style="font-size:45px;padding-left:30px;font-weight:bold;line-height:1.2">{{__('messages.display.nil')}}</td>
+                                <td v-if="token" style="font-size:45px;padding-left:30px; font-weight:bold;line-height:1.2">@{{token?.counter.name}}</td>
+                                <td v-if="!token" style="font-size:45px;padding-left:30px;font-weight:bold;line-height:1.2">{{__('messages.display.nil')}}</td>
+                                <td v-if="token?.call_status_id == {{CallStatuses::SERVED}}" style="font-size:45px;padding-left:30px;font-weight:bold;line-height:1.2;color:#00DB3A">{{__('messages.display.served')}}</td>
+                                <td v-if="token?.call_status_id == {{CallStatuses::NOSHOW}}" style="font-size:45px;padding-left:30px;font-weight:bold;line-height:1.2;color:red">{{__('messages.display.noshow')}}</td>
+                                <td v-if="token?.call_status_id != {{CallStatuses::SERVED}} &&  token?.call_status_id != {{CallStatuses::NOSHOW}}" style="font-size:45px;padding-left:30px;font-weight:bold;line-height:1.2;color:#D9AD09">Serving</td>
+                                <td style="font-size:45px;padding-left:30px;font-weight:bold;line-height:1.2;color:#50C878">Dr.Sanjay</td>
                             </tr>                            
                         </tbody>
                     </table>

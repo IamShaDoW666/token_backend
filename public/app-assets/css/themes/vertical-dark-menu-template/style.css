@@ -8952,7 +8952,7 @@ nav.display-none.search-sm .nav-wrapper form .input-field i
 .sidenav-main
 {
     position: fixed;
-    z-index: 999;
+    z-index: 0;
     top: 0;
 
     width: 250px;
@@ -8978,7 +8978,7 @@ nav.display-none.search-sm .nav-wrapper form .input-field i
     width: inherit;
     height: 64px;
 
-    background: #009688;
+    background: #00BFFF;
     box-shadow: 0 4px 7px 0 rgba(0, 0, 0, .2);
 
     -webkit-backface-visibility: hidden;
@@ -9243,7 +9243,7 @@ nav.display-none.search-sm .nav-wrapper form .input-field i
     margin: 0;
 
     color: #fff;
-    background: #009688;
+    background: #00BFFF;
     box-shadow: none;
 }
 
@@ -9517,7 +9517,7 @@ nav.display-none.search-sm .nav-wrapper form .input-field i
     margin-right: 1.15rem;
 
     color: #fff;
-    border-radius: 0 25px 25px 0;
+    /* border-radius: 0 25px 25px 0; */
 }
 
 .sidenav-active-rounded .sidenav li > a.active > i

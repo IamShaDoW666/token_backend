@@ -1,7 +1,7 @@
-@extends('layout.call_page')
+@extends('layout.live_page')
 @section('content')
 
-<div class="center" id="live-page">
+<div class="center2" id="live-page">
     <h5>Department:{{$queue->service->name}}</h5>    
     <div v-if="token?.id">
         <h1 style="color: #000">Your Token: {{$queue->letter}} {{$queue->number}}</h1>
@@ -35,4 +35,39 @@
         token_reference: "{{$queue->id}}"
     }
 </script>
+
+<style>
+
+
+    /* Center the content */
+    .center2 {
+        text-align: center;
+        border: 2px solid #000; /* Add border to the entire div */
+        padding: 10px; /* Add padding for better spacing */
+    }
+
+    /* Adjust font sizes */
+    h5 {
+        font-size: 18px;
+    }
+
+    h1 {
+        font-size: 24px;
+    }
+
+    h2 {
+        font-size: 20px;
+    }
+
+    h3 {
+        font-size: 16px;
+    }
+
+    /* Hide certain elements */
+    /* Example: hide the current token and average time on mobile */
+    .center .h2, .center .h3 {
+        display: none;
+    }
+
+</style>
 @endsection

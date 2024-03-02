@@ -3673,7 +3673,7 @@ ul.staggered-list li
     padding-top: 20px;
 
     color: #fff;
-    background-color: #009688;
+    background-color: #00BFFF;
 }
 
 .page-footer .footer-copyright
@@ -5418,7 +5418,7 @@ nav
     height: 56px;
 
     color: #fff;
-    background-color: #009688;
+    background-color: #00BFFF;
 }
 
 nav.nav-extended
@@ -6675,14 +6675,14 @@ small
     letter-spacing: .5px;
 
     color: #fff;
-    background-color: #009688;
+    background-color: #00BFFF;
 }
 
 .btn:hover,
 .btn-large:hover,
 .btn-small:hover
 {
-    background-color: #009688;
+    background-color: #1E90FF;
 }
 
 .btn-floating

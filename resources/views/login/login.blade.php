@@ -9,7 +9,7 @@
     <meta name="keywords" content="ASTIN Admin template">
     <meta name="author" content="ThemeSelect">
     <!-- <meta name="_token" content="{!! csrf_token() !!}" /> -->
-    <title>ADMIN LOGIN | JLToken</title>
+    <title>Digiimpact</title>
     <link rel="apple-touch-icon" href="{{asset('app-assets/images/icon/favicon.ico')}}">
     <link rel="shortcut icon" type="image/x-icon" href="{{asset('app-assets/images/icon/favicon.ico')}}">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -27,7 +27,7 @@
 </head>
 <!-- END: Head-->
 
-<body class="vertical-layout page-header-light vertical-menu-collapsible vertical-dark-menu preload-transitions 1-column    blank-page blank-page" data-open="click" data-menu="vertical-dark-menu" data-col="1-column" style="background-color: #009688;">
+<body class="vertical-layout page-header-light vertical-menu-collapsible vertical-dark-menu preload-transitions 1-column    blank-page blank-page" data-open="click" data-menu="vertical-dark-menu" data-col="1-column" style="background-color: #ffffff;">
     <div class="row">
         <div class="col s12">
             <div class="container">
@@ -48,7 +48,7 @@
 
                             <div class="row">
                                 <div class="input-field col s12 offset-m4">
-                                    <h5 class="ml-4" style="font-weight: 800;">JL Token</h5>
+                                    <h5 class="ml-4" style="font-weight: 800;">Digiimpact</h5>
                                 </div>
                             </div>
                             <div class="row margin">
@@ -77,8 +77,8 @@
                                 </div>
                             </div> -->
                             <div class="row">
-                                <div class="input-field col s12">
-                                    <button type="submit" class="btn waves-effect waves-light border-round  col s12">Login</button>
+                                <div class="input-field col s12" style="display: flex; justify-content: center;">
+                                    <button type="submit" class="btn waves-effect waves-light   col s6">Login</button>
                                 </div>
                             </div>
                         </form>
