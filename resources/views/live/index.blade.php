@@ -42,7 +42,7 @@
 <style>
  .token-slip {
     border-style: dashed;
-    width: 200px; /* Adjust width as needed */
+    width: 250px; /* Adjust width as needed */
     padding: 10px;
     margin: 20px auto;
     font-family: Arial, sans-serif;
@@ -66,8 +66,13 @@
   }
   
    .center2 {
-        text-align: center;
-        padding: 10px; /* Add padding for better spacing */
+    text-align: center;
+    padding: 10px; 
+    height: 50%; 
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     }
    
     h5 {
