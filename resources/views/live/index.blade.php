@@ -9,7 +9,7 @@
 <body>
 @extends('layout.live_page')
 @section('content')    
-  <div class="center2" id="live-page">
+  <div v-cloak class="center2" id="live-page">
   <div v-if="token?.id" class="token-slip">
   <div class="title">Your Token: {{$queue->letter}} {{$queue->number}}</div>
   <div class="token-details">
