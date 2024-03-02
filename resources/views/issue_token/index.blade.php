@@ -14,15 +14,17 @@
             <div class="container no-print">
                 <div class="row">
                     <div class="col s12">
-                        <div class="card" style="background:#f9f9f9;box-shadow:none" id="service-btn-container">
-                            <span class="card-title" style="line-height:1;font-size:22px"> {{__('messages.issue_token.click one service to issue token')}}</span>
-                            <div class="divider" style="margin:10px 0 10px 0"></div>
-
-                            @foreach($services as $service)
-                            <span class="btn btn-large btn-queue waves-effect waves-light mb-1" id="service_id_24" style="background: #009688" onclick="queueDept({{$service}})">{{$service->name}}</span>
-                            @endforeach
-                        </div>
+                        <div class="card"  style="display:flex; justify-content: center; align-items: center; " id="service-btn-container">
+                        <span class="card-title" style="line-height:3;font-size:22px"> {{__('messages.issue_token.click one service to issue token')}}</span>
                     </div>
+                            <!-- <div class="divider" style="margin:10px 0 10px 0"></div> -->
+
+                    @foreach($services as $service)
+                    <div style="display: flex; justify-content: center;">
+                 <div class="btn btn-large btn-queue waves-effect waves-light mr-2  mb-1" id="service_id_24" style="background: #00BFFF" onclick="queueDept({{$service}})">{{$service->name}}</div>
+                    @endforeach
+                    </div>      
+                  
                     <form action="{{route('create-token')}}" method="post" id="my-form-two" style="display: none;">
                         {{csrf_field()}}
 
