@@ -43,6 +43,7 @@
                             </button>
                         </div>
                         @endif
+                       
                         <form id="login_form" class="login-form" method="post" action="{{route('post_login')}}">
                             @csrf
 
@@ -55,9 +56,10 @@
                                 <div class="input-field col s12">
                                     <i class="material-icons prefix pt-2">person_outline</i>
                                     <input id="email" type="text" name="email" value="{{old('email')}}">
-                                    <label for="email" class="center-align">Email</label>
+                                    <label for="email" class="form-control form-control-lg">Email</label>
                                 </div>
                             </div>
+          
 
                             <div class="row margin">
                                 <div class="input-field col s12">
@@ -66,7 +68,7 @@
                                     <label for="password">Password</label>
                                 </div>
                             </div>
-                            <!-- <div class="row">
+                            <div class="row">
                                 <div class="col s12 m12 l12 ml-2 mt-1">
                                     <p>
                                         <label>
@@ -75,7 +77,7 @@
                                         </label>
                                     </p>
                                 </div>
-                            </div> -->
+                            </div>
                             <div class="row">
                                 <div class="input-field col s12" style="display: flex; justify-content: center;">
                                     <button type="submit" class="btn waves-effect waves-light   col s6">Login</button>

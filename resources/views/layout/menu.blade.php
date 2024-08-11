@@ -8,7 +8,7 @@
   </div>
   <ul class="sidenav sidenav-collapsible leftside-navigation collapsible sidenav-fixed menu-shadow" style="padding-top: 20px; padding-left:0" id="slide-out" data-menu="menu-navigation" data-collapsible="accordion">
     @can('view dashboard')
-    <li class="bold"><a class="waves-effect waves-cyan @yield('dashboard')" href="{{route('dashboard')}}" style="padding-top: 10px;"><i class="material-icons">dashboard</i><span class="menu-title" data-i18n="ToDo">{{__('messages.menu.dashboard')}}</span></a>
+    <li class="bold"><a class="waves-effect waves-cyan @yield('dashboard')" href="/dashboard" style="padding-top: 10px;"><i class="material-icons">dashboard</i><span class="menu-title" data-i18n="ToDo">{{__('messages.menu.dashboard')}}</span></a>
     </li>
     @endcan
     @can('call token')
@@ -58,6 +58,8 @@
   <li class="bold"><a class="waves-effect waves-cyan @yield('profile') " href="{{route('profile')}}"><i class="material-icons">person</i><span class="menu-title" data-i18n="Kanban">{{__('messages.common.profile')}}</span></a>
   </li>
   @endcan
+  <li class="bold"><a class="waves-effect waves-cyan @yield('qr-code') " href="{{route('qr-code')}}"><i class="material-icons">share</i><span class="menu-title" data-i18n="Kanban">Qr Code</span></a>
+  </li>
 
   </ul>
   <div class="navigation-background"></div><a class="sidenav-trigger btn-sidenav-toggle btn-floating btn-medium waves-effect waves-light hide-on-large-only" href="#" data-target="slide-out"><i class="material-icons">menu</i></a>

@@ -8,18 +8,31 @@
     <div class="loader-section section-right"></div>
 
 </div>
-<div id="main" class="noprint" style="padding: 15px 15px 0px;">
-    <div class="wrapper">
+<div id="main" class="noprint" style="padding: 15px 15px 0px; ">
+   
         <section class="content-wrapper no-print">
             <div class="container no-print">
                 <div class="row">
-                    <div class="col s12">
+                <div class="col s12">
+                 <div class="card" id="service-btn-container">
+              <div class="card-content center-align">
+              <span class="card-title" style="line-height: 3; font-size: 22px; margin-bottom: 10px;">
+                {{__('messages.issue_token.click one service to issue token')}}
+                  </span>
+                   </div>
+                  </div>
+                 </div>
+                    <!-- <div class="col s12">
                         <div class="card"  style="display:flex; justify-content: center; align-items: center; " id="service-btn-container">
-                        <span class="card-title" style="line-height:3;font-size:22px"> {{__('messages.issue_token.click one service to issue token')}}</span>
-                    </div>
-                            <!-- <div class="divider" style="margin:10px 0 10px 0"></div> -->
+                        <span class="card-title" style="line-height:3;font-size:22px;margin-bottom:10px"> {{__('messages.issue_token.click one service to issue token')}}</span>
+                    </div>  -->
+                             <div class="divider" style="margin:10px 0 10px 0"></div>
 
-                    @foreach($services as $service)
+                 
+        </div>
+            </div>
+        </section>
+        @foreach($services as $service)
                     <div style="display: flex; justify-content: center;">
                  <div class="btn btn-large btn-queue waves-effect waves-light mr-2  mb-1" id="service_id_24" style="background: #00BFFF" onclick="queueDept({{$service}})">{{$service->name}}</div>
                     @endforeach
@@ -30,10 +43,7 @@
 
 
                     </form>
-                </div>
-            </div>
-        </section>
-    </div>
+  
     <!-- Modal Structure -->
     <div id="modal1" class="modal modal-fixed-footer" style="max-height: 30%; width:80%">
         <form id="details_form">

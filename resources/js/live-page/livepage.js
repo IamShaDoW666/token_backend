@@ -14,7 +14,7 @@ if (document.getElementById("live-page")) {
         time_after_called: null,
         timer_interval: null,
         time_out: null,
-        averageTime: null
+        averageTime: null,
       };
     },
     methods: {
@@ -24,33 +24,44 @@ if (document.getElementById("live-page")) {
           .then((res) => {
             this.tokens_for_next_to_call = res.data.tokens_for_call;
             this.called_tokens = res.data.called_tokens;
-            this.token = this.called_tokens.find(
-              (e) => e.queue_id == window?.JLToken.token_reference
+            this.token = this.tokens_for_next_to_call.find(
+              (e) => e.reference_no == window?.JLToken.token_reference
             );
             if (this.token == null) {
-              this.token = this.tokens_for_next_to_call.find(
-                (e) => e.id == window?.JLToken.token_reference
+              this.token = this.called_tokens.find(
+                (e) => e.reference_no == window?.JLToken.token_reference
               );
             }
+            console.log(this.token);
+
+
             if (
               this.called_tokens.length &&
               this.called_tokens[0] &&
               this.called_tokens[0].ended_at == null
-            ) {                
+            ) {
               this.lastToken = this.called_tokens[0];
-              this.setDataForTimer(this.lastToken);        
+              this.setDataForTimer(this.lastToken);
               this.isCalled = true;
-              let timeArr = this.called_tokens.map(obj => obj.served_time).filter(e => e!=null)
-              this.averageTime = this.getAverageTime(timeArr)              
-              console.log(timeArr, this.averageTime)
+              let timeArr = this.called_tokens
+                .map((obj) => obj.served_time)
+                .filter((e) => e != null);
+              if (timeArr.length) {
+                this.averageTime = this.getAverageTime(timeArr);
+              }
+              console.log(timeArr, this.averageTime);
             } else if (
               this.called_tokens &&
               this.called_tokens.length &&
               this.called_tokens[0]
             ) {
-            let timeArr = this.called_tokens.map(obj => obj.served_time).filter(e => e!=null)
-              this.averageTime = this.getAverageTime(timeArr)   
-              console.log(timeArr, this.averageTime)
+              let timeArr = this.called_tokens
+                .map((obj) => obj.served_time)
+                .filter((e) => e != null);
+              if (timeArr.length) {
+                this.averageTime = this.getAverageTime(timeArr);
+              }
+              console.log(timeArr, this.averageTime);
               this.lastToken = this.called_tokens[0];
               this.isCalled = false;
             } else {
@@ -82,15 +93,16 @@ if (document.getElementById("live-page")) {
         const minutes = Math.floor((seconds % 3600) / 60);
         const remainingSeconds = seconds % 60;
         if (hours == 0) {
-            return `${String(minutes).padStart(
-                2,
-                "0"
-              )} Minutes ${String(remainingSeconds).padStart(2, "0")} Seconds`;
+          return `${String(minutes).padStart(2, "0")} Minutes ${String(
+            remainingSeconds
+          ).padStart(2, "0")} Seconds`;
         }
-        return `${String(hours).padStart(2, "0")} Hours ${String(minutes).padStart(
+        return `${String(hours).padStart(2, "0")} Hours ${String(
+          minutes
+        ).padStart(2, "0")} Minutes ${String(remainingSeconds).padStart(
           2,
           "0"
-        )} Minutes ${String(remainingSeconds).padStart(2, "0")} Seconds`;
+        )} Seconds`;
       },
       timeToSeconds(timeStr) {
         const [hours, minutes, seconds] = timeStr.split(":").map(Number);

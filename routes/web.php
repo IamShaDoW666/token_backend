@@ -42,6 +42,9 @@ Route::get('/test', function() {
 
 //login
 Route::get('/', [AuthController::class, 'index'])->name('login')->middleware('guest:web');
+// Route::get('/', function() {
+//     return "Hello";
+// })->middleware('guest:web');
 Route::post('login', [AuthController::class, 'authenticate'])->name('post_login');
 Route::middleware(['setLocale'])->group(function () {
     Route::middleware(['auth'])->group(function () {
@@ -80,6 +83,11 @@ Route::middleware(['setLocale'])->group(function () {
             Route::post('update-profile', [ProfileController::class, 'update'])->name('update_profile');
             Route::post('change-password', [ProfileController::class, 'changePassword'])->name('change_password');
         });
+
+        Route::get('/qr-code', function () {
+            $qr = "https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=" . route('issue_token');
+            return view('qr.index', compact('qr'));
+        })->name('qr-code');
         // Route::get('reset-image', [ProfileController::class, 'resetImage'])->name('profile_image_reset');
         //reports
         Route::group(['middleware' => ['permission:view reports']], function () {

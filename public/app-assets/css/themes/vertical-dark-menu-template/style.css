@@ -8952,7 +8952,7 @@ nav.display-none.search-sm .nav-wrapper form .input-field i
 .sidenav-main
 {
     position: fixed;
-    z-index: 0;
+    z-index: 997;
     top: 0;
 
     width: 250px;
@@ -9243,7 +9243,7 @@ nav.display-none.search-sm .nav-wrapper form .input-field i
     margin: 0;
 
     color: #fff;
-    background: #00BFFF;
+    background: #202C46;
     box-shadow: none;
 }
 

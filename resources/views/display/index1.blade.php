@@ -36,7 +36,7 @@
                         </tbody>
                     </table>
                 </div>                
-                <div class="row" style="margin-bottom:0; margin-top: 15px;">
+                <div class ="bottom-div">
                     <marquee><span style="font-size:{{$settings->display_font_size}}px;color:{{$settings->display_font_color}}">{{$settings->display_notification ? $settings->display_notification : 'Hello' }}<span></span></span></marquee>
                 </div>
                 <audio id="called_sound">
@@ -67,6 +67,15 @@
         justify-content: center;
         align-items: center;
         min-height: 100vh;
-        /* Optional: Ensure the table is centered vertically on the page */
+              
     }
+    .bottom-div {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: #f0f0f0;
+    padding: 20px;
+    text-align: center;
+}
 </style>

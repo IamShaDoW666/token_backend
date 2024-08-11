@@ -9,7 +9,6 @@
 
 </div>
 <div id="main" class="no-print" style="padding: 15px 15px 0px;">
-
     <div class="wrapper" style=" min-height: 557px;" id="display-page">
         <section class="content-wrapper no-print">
             <div id="callarea" class="row" style="line-height:1.23;display:flex; flex-direction:row-reverse">
@@ -65,25 +64,7 @@
                         </div>
                     </div>
                 </div> 
-                <!-- <div class="col m12">
-                    <div class="card-panel left-align" style="margin-bottom:0;height:74vh;display:flex;flex-direction:row;justify-content:center;align-items:center">
-                        <div>
-                            <div class="bolder-color" style="font-size:50px; margin:0px">{{__('messages.display.token number')}}</div>
-                            <span v-if="tokens[0]" style="font-size:130px;color:red;font-weight:bold;line-height:1.2">@{{tokens[0]?.token_letter}}-@{{tokens[0]?.token_number}}</span>
-                            <span v-if="!tokens[0]" style="font-size:130px;color:red;font-weight:bold;line-height:1.2">{{__('messages.display.nil')}}</span>
-                            <div v-if="tokens[0]?.call_status_id == {{CallStatuses::SERVED}}" style="font-size:40px; color:#009688">{{__('messages.display.served')}}</div>
-                            <div v-if="tokens[0]?.call_status_id == {{CallStatuses::NOSHOW}}" style="font-size:40px; color:red">{{__('messages.display.noshow')}}</div>
-                            <div v-if="tokens[0] && tokens[0]?.call_status_id == null" style="font-size:40px; color:orange; font-weight: bold">{{__('messages.display.serving')}}</div>
-                            <div v-if="!tokens[0]" style="font-size:40px; color:orange; font-weight: bold">{{__('messages.display.nil')}}</div>
-                            <div class="bolder-color" style="font-size:40px; line-height:1.4">{{__('messages.display.please proceed to')}}</div>
-                            <div v-if="tokens[0]" id="counter0" style="font-size:70px; color:red;line-height:1.5">@{{tokens[0]?.counter.name}}</div>
-                            <div v-if="!tokens[0]" style="font-size:70px; color:red;line-height:1.5">{{__('messages.display.nil')}}</div>
-                        </div>
-                    </div>
-                </div> -->
-            </div>
-            <!-- <p>@{{ tokens }}</p>
-            <p>@{{ queue }}</p> -->
+              </div>
             <div class="row" style="margin-bottom:0; margin-top: 15px;">
                 <marquee><span style="font-size:{{$settings->display_font_size}}px;color:{{$settings->display_font_color}}">{{$settings->display_notification ? $settings->display_notification : 'Hello' }}<span></span></span></marquee>
             </div>
