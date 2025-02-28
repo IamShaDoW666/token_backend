@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Jobs;
+
 use Carbon\Carbon;
 use Faker\Provider\bg_BG\PhoneNumber;
 use Illuminate\Bus\Queueable;
@@ -23,22 +24,21 @@ class SendWhatsappJob  implements ShouldQueue
      * @return void
      * 
      */
-     protected $token;
-     protected $pdf;
-     protected $text;
-     protected $settings;
-     protected $from_call;
-    
+    protected $token;
+    protected $pdf;
+    protected $text;
+    protected $settings;
+    protected $from_call;
 
-    public function __construct($token,$pdf, $text, $settings, $from_call)
-   {
-       $this->token = $token;
-       $this->pdf = $pdf;
-       $this->text = $text;
-       $this->from_call = $from_call;
-       $this->settings = $settings;
-       
-     }
+
+    public function __construct($token, $pdf, $text, $settings, $from_call)
+    {
+        $this->token = $token;
+        $this->pdf = $pdf;
+        $this->text = $text;
+        $this->from_call = $from_call;
+        $this->settings = $settings;
+    }
 
     /**
      * Execute the job.
@@ -47,27 +47,25 @@ class SendWhatsappJob  implements ShouldQueue
      */
     public function handle()
     {
-       $url = config('app.url') . '/live/' . $this->token->reference_no;
+        $url = config('app.url') . '/live/' . $this->token->reference_no;
         try {
-             $data = [
-                    'api_key' => 'VzkZWxvGBEQ0AKvkDsvjG5q7kxfk8a',
-                    'sender' => '917012749946',
-                    'number' => $this->token->phone,
-                    'message' => $url,
-                    'url'  => $this->pdf,
-                    'type' => 'pdf',
-                    
-                    ];
-                    $response = Http::post('https://saakshi.cloud/send-media', $data);
-                    
-                    if ($response->failed()) {
-                        session()->flash('status', 'Task was successful!');
-                        throw new \Exception("Failed to send message");
-                    }
-                   
+            $data = [
+                'api_key' => 'vVU1424nhsmqF7S',
+                'sender' => '917012749946',
+                'number' => $this->token->phone,
+                'message' => $url,
+                'url'  => $this->pdf,
+                'type' => 'pdf',
+
+            ];
+            $response = Http::post('https://saakshi.tech/send-media', $data);
+
+            if ($response->failed()) {
+                session()->flash('status', 'Task was successful!');
+                throw new \Exception("Failed to send message");
+            }
         } catch (\Exception $e) {
             session()->flash('status', 'Task was successful!');
         }
     }
-
 }
